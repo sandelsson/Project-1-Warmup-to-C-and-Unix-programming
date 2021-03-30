@@ -12,7 +12,7 @@
 #define MAX 100
 #define BUFFSIZE 100
 
-
+/*
 void read(){
     char * line = NULL;
     size_t len = 0;
@@ -52,7 +52,7 @@ void read(){
     exit(EXIT_SUCCESS); 
     
 }
-
+*/
 
 //When no files are supplied by user --> input is read from stdin and output is wrote on screen.
 //source: https://stackoverflow.com/questions/41518039/how-to-input-strings-into-an-array-in-c
@@ -124,6 +124,8 @@ void  read_write_stdout_stdin(){
     	
     	
 //void read_and_write(char* file_read)
+
+//TÄÄ ANTAA JOSTAIN SYYSTÄ SEGMENTATION ERRORII EN TIIÄ MIKS EI PYSTY OIKEE TÄS LINUXIS EES DEBUGGAA KU LÄMÄÄ SEN SAMANTIEN
 void read_and_print()
 {
   
@@ -168,10 +170,6 @@ int main(int argc, char *argv[]) {
     if (argc == 1){
     	read_write_stdout_stdin();
     }
-    
-    //MULLA TULEE STRCMP(ARGV[1], ARGV[2]) JOKU VITUN SEGMENTATION ERROR ENKÄ YMMÄRRÄ MIKÄ SAATANA TOSSA ON
-    //VÄÄRIN. OON YRITTÄNY TALLENTAA NOIT MUUTTUJII JA VAIKKA PERSEREIKÄÄ MUT EI SAATANA SKULAA
-    //SAATTAA OLLA TÄS LINUXIS TOI VIKA EN USKO ET TULEE TOTA VITTUA JOS LAITTAA VSCODEE
     
     
      
