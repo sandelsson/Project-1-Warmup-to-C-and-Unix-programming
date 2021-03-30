@@ -11,13 +11,14 @@
 #include <string.h>
 #define MAX 100
 #define BUFFSIZE 100
-/*
 
-void read(char *argv[]){
+
+void read(){
     char * line = NULL;
     size_t len = 0;
     ssize_t read;
     FILE *fp;
+    int count = 0;
     
     if (fp = NULL){
     	fprintf(stderr, "Unable to open file \n");
@@ -25,32 +26,41 @@ void read(char *argv[]){
     	exit(1);
     }
     
-    char *words[MAX];
+    char *list[MAX];
 
-    fp = fopen(argv[0],"r");
+    fp = fopen("pikkukalle.txt","r"); //EN SAA PASSATTUU TOT SAATANAN CMDL ARGUMENTTII
     
     while ((read = getline(&line, &len, fp)) != -1) {
-        printf("Retrieved line of length %zu:\n", read);
-        printf("%s", line);
+    	
+        strcpy(list[count], line);
+        count++;
     }
+    
+        printf("\n");    
+    printf("Reverse order: \n\n");    
+    //Loop through the array in reverse order    
+    for (int i = count-2; i >= 0; i--) {
+        printf("%s\n", list[i]);
+        free(list[i]);
+        list[i] = NULL;
+    }  
 
     fclose(fp);
     if (line){
         free(line);
     }
-    exit(EXIT_SUCCESS);
-    
-    
+    exit(EXIT_SUCCESS); 
     
 }
-*/
+
+
 //When no files are supplied by user --> input is read from stdin and output is wrote on screen.
 //source: https://stackoverflow.com/questions/41518039/how-to-input-strings-into-an-array-in-c
 
 void  read_write_stdout_stdin(){
     char *words[MAX];
     char buffer[BUFFSIZE];
-    int i, count = 0, slen; /* can replace size_t with int if you prefer */
+    int i, count = 0, slen;
 
     /* loops only for three input strings */
     for (i = 0; strcmp(buffer, "0"); i++) {
@@ -113,7 +123,35 @@ void  read_write_stdout_stdin(){
     	
     	
     	
-    	
+//void read_and_write(char* file_read)
+void read_and_print()
+{
+  
+    char *line[MAX];
+    FILE *fp; 
+    int i = 0;
+    int count = 0;
+    int tot = 0;	
+
+    fp = fopen("pikkukalle.txt", "r");
+    while(fgets(line[count], MAX, fp)) 
+	{
+        line[count][strlen(line[count]) - 1] = '\0';
+        count++;
+    }
+    tot = count; 
+    for(count = 0; count < tot; ++i){
+        printf(" %s\n", line[count]);
+    }
+    printf("\n");
+    
+    for (int i = count-2; i >= 0; i--) {
+        printf("%s\n", line[i]);
+        free(line[i]);
+        line[i] = NULL;
+    }  
+  
+} 	
 
 
 
@@ -123,6 +161,10 @@ void  read_write_stdout_stdin(){
 
 int main(int argc, char *argv[]) {
 
+    char file_read[] = "";
+    char file_write[] = "";
+    
+
     if (argc == 1){
     	read_write_stdout_stdin();
     }
@@ -130,23 +172,30 @@ int main(int argc, char *argv[]) {
     //MULLA TULEE STRCMP(ARGV[1], ARGV[2]) JOKU VITUN SEGMENTATION ERROR ENKÄ YMMÄRRÄ MIKÄ SAATANA TOSSA ON
     //VÄÄRIN. OON YRITTÄNY TALLENTAA NOIT MUUTTUJII JA VAIKKA PERSEREIKÄÄ MUT EI SAATANA SKULAA
     //SAATTAA OLLA TÄS LINUXIS TOI VIKA EN USKO ET TULEE TOTA VITTUA JOS LAITTAA VSCODEE
-   
     
-    /*
-    if ( ! strcmp(argv[1], argv[2])) {
+    
+     
+    if (argc == 2){
+    	fprintf(stdout, "its lit u got one parameter jes vittuuuu!!!");
+    	//strcpy(file_read, argv[1]);
+    	//read_and_write(file_read);
+    	read_and_print();
+    }
+    if ((argc > 2) &&(strcmp(argv[1], argv[2])==0)){
     	fprintf(stderr, "Input and output file must differ\n");
         exit(1);
     }
-*/
-    if (argc > 2) {
+    
+
+    if (argc > 3) {
+    	printf("%d", argc);
         fprintf(stderr, "Usage: reverse <input> <output>\n");
         exit(1);
     }
     
-    if (argc == 2){
-    	//read(argv[1])
+    if (argc == 3){
+    	fprintf(stdout, "Lit nyt annoit inputin ja outputin ja joudun koodaa äijälle niin vitusti funktioit :CC \n");
     }
-    
     
     printf("Kiitos ohjelman käytöstä.\n");
     return 0;
