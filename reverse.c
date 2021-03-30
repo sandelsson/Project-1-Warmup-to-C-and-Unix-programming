@@ -19,6 +19,17 @@ void read(argv[1]){
     file = fopen(read_file,"r");
 }
 
+
+//When input file is supplied and output is printed on the screen.
+void write_stdout(){} 
+
+
+//When no files are supplied by user --> input is read from stdin and output is wrote on screen.
+void read_write_stdout_stdin(){}
+
+
+	
+
 int main(int argc, char *argv[]) { 
 
     if (argv[1] == argv[2]) {
@@ -30,6 +41,13 @@ int main(int argc, char *argv[]) {
         fprintf(stderr, "Usage: reverse <input> <output>\n");
         exit(1);
     }
+    
+    if (argc ==1){
+    
+    	}
+    	
+    if (argc    
+    
 
     char *list = read(argv[1]);
     for (int i = 0,, i++) {
