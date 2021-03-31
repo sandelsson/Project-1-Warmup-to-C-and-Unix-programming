@@ -69,7 +69,7 @@ void  read_write_stdout_stdin(){
         //printf("Enter a word: ");
         if (fgets(buffer, BUFFSIZE, stdin) == NULL) {
             fprintf(stderr, "Error reading string into buffer.\n");
-            exit(EXIT_FAILURE);
+            exit(1);
         }
 
         /* removing newline from buffer, along with checking for overflow from buffer */
@@ -79,14 +79,14 @@ void  read_write_stdout_stdin(){
                 buffer[slen-1] = '\0';
             } else {
                 printf("Exceeded buffer length of %d.\n", BUFFSIZE);
-                exit(EXIT_FAILURE);
+                exit(1);
             }
         } 
 
         /* checking if nothing was entered */
         if (!*buffer) {
             printf("No string entered.\n");
-            exit(EXIT_FAILURE);
+            exit(1);
         }
 
         /* allocate space for `words[i]` and null terminator */
@@ -95,7 +95,7 @@ void  read_write_stdout_stdin(){
         /* checking return of malloc, very good to do this */
         if (!words[count]) {
             printf("Cannot allocate memory for string.\n");
-            exit(EXIT_FAILURE);
+            exit(1);
         }
 
         /* if everything is fine, copy over into your array of pointers */
