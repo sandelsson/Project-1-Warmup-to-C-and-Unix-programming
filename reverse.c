@@ -3,7 +3,7 @@
  * Harjoitusprojekti: Project 1 
  * Tekijät: Kukonlehto Joonas, Ruuskanen Santeri
  * Päivämäärä: 30.3.2021
- * Yhteistyö ja lähteet:
+ * Yhteistyö ja lähteet: Toimiiko tämä?
  */
 /*******************************************************************/
 #include <stdio.h>
