@@ -165,20 +165,21 @@ void read_print(FILE *fp){
 	int count = 0;
 	char *list[200];
 	
-	while(fgets(line, 200, fp)!=NULL){
-		//printf("%s\n", line);
-		strcpy(list[count], line);
+	while(fgets(line, sizeof(line), fp)!=NULL){
+		
+		//strcpy(list[count], line);
+		printf("%s\n", line);		
 		count++;
 		
 	}
 	printf("\n");
 	
 	
-	for (int i = count-2; i >= 0; i--) {
+	/*for (int i = count-2; i >= 0; i--) {
         	printf("%s\n", list[i]);
         	free(list[i]);
         	list[i] = NULL;
-    }  
+    } */ 
 		
 
 
@@ -205,7 +206,7 @@ int main(int argc, char *argv[]) {
     	//strcpy(file_read, argv[1]);
     	//read_and_write(file_read);
     	FILE *fp;
-    	fp = fopen(argv[1], "r");
+    	fp = fopen("pikkukalle.txt", "r");
     	//read_and_print(fp);
     	read_print(fp);
     	fclose(fp);
