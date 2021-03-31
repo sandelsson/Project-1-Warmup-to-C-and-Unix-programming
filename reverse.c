@@ -127,26 +127,30 @@ void  read_write_stdout_stdin(){
 //void read_and_write(char* file_read)
 
 //TÄÄ ANTAA JOSTAIN SYYSTÄ SEGMENTATION ERRORII EN TIIÄ MIKS EI PYSTY OIKEE TÄS LINUXIS EES DEBUGGAA KU LÄMÄÄ SEN SAMANTIEN
-void read_and_print()
+void read_and_print(FILE *fp)
 {
+    printf("debugreal1");
   
     char *line[MAX];
-    FILE *fp; 
+    //FILE *fp; 
     int i = 0;
     int count = 0;
-    int tot = 0;	
+    int tot = 0;
+    printf("debug1");	
 
-    fp = fopen("pikkukalle.txt", "r");
+    //fp = fopen("pikkukalle.txt", "r");
     while(fgets(line[count], MAX, fp)) 
 	{
         line[count][strlen(line[count]) - 1] = '\0';
         count++;
     }
+    printf("debug2");
     tot = count; 
     for(count = 0; count < tot; ++i){
         printf(" %s\n", line[count]);
     }
     printf("\n");
+    printf("debug3");
     
     for (int i = count-2; i >= 0; i--) {
         printf("%s\n", line[i]);
@@ -154,18 +158,28 @@ void read_and_print()
         line[i] = NULL;
     }  
   
-} 	
+} 
+
+void read_print(FILE *fp){
+	char line[MAX];
+	
+	while(fgets(line, MAX, fp)!=NULL){
+		printf("%s\n", line);
+	}
+	printf("\n");
+		
 
 
-
+}
 
 
 	
 
 int main(int argc, char *argv[]) {
 
-    char file_read[] = "";
-    char file_write[] = "";
+    //char file_read[] = "";
+    //char file_write[] = "";
+    
     
 
     if (argc == 1){
@@ -178,7 +192,11 @@ int main(int argc, char *argv[]) {
     	fprintf(stdout, "its lit u got one parameter jes vittuuuu!!!");
     	//strcpy(file_read, argv[1]);
     	//read_and_write(file_read);
-    	read_and_print();
+    	FILE *fp;
+    	fp = fopen(argv[1], "r");
+    	//read_and_print(fp);
+    	read_print(fp);
+    	fclose(fp);
     }
     if ((argc > 2) &&(strcmp(argv[1], argv[2])==0)){
     	fprintf(stderr, "Input and output file must differ\n");
