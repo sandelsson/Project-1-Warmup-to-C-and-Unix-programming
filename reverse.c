@@ -62,7 +62,8 @@ void  read_write_stdout_stdin(){
     char buffer[BUFFSIZE];
     int i, count = 0, slen;
 
-    /* loops only for three input strings */
+    /* loops until input is '0' */
+    fprintf(stdout, "Input as many lines as you want and end with '0' (zero).\n\n");
     for (i = 0; strcmp(buffer, "0"); i++) {
 
         /* read input of one string, with error checking */
