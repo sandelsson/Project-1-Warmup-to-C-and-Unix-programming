@@ -162,11 +162,23 @@ void read_and_print(FILE *fp)
 
 void read_print(FILE *fp){
 	char line[MAX];
+	int count = 0;
+	char *list[200];
 	
-	while(fgets(line, MAX, fp)!=NULL){
-		printf("%s\n", line);
+	while(fgets(line, 200, fp)!=NULL){
+		//printf("%s\n", line);
+		strcpy(list[count], line);
+		count++;
+		
 	}
 	printf("\n");
+	
+	
+	for (int i = count-2; i >= 0; i--) {
+        	printf("%s\n", list[i]);
+        	free(list[i]);
+        	list[i] = NULL;
+    }  
 		
 
 
