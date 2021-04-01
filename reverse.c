@@ -1,15 +1,15 @@
 /*******************************************************************/
 /* Käyttäjärjestelmät ja systeemiohjelmointi
  * Harjoitusprojekti: Project 1 
- * Tekijät: Kukonlehto Joonas, Ruuskanen Santeri
- * Päivämäärä: 30.3.2021
- * Yhteistyö ja lähteet: Toimiiko tämä?
+ * Done by: Kukonlehto Joonas, Ruuskanen Santeri
+ * Date: 30.3.2021
+ * Source: https://stackoverflow.com/questions/41518039/how-to-input-strings-into-an-array-in-c
  */
 /*******************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define MAX 1000				//We used 1000 as we thought it would cover all cases
+#define MAX 1000
 #define BUFFSIZE 1000
 
 
@@ -50,7 +50,11 @@ void  read_write_stdout_stdin(){
 
         /* allocate space for `words[i]` and null terminator */
         words[count] = malloc(strlen(buffer));
-
+	if (malloc(strlen(buffer)) == NULL) {
+		fprintf(stderr, "Malloc failed\n");
+		exit(1);	 
+	}
+	
         /* checking return of malloc, very good to do this */
         if (!words[count]) {
             printf("Cannot allocate memory for string.\n");
@@ -78,6 +82,7 @@ void  read_write_stdout_stdin(){
     }  
 
     printf("\n");
+
 }
     	
     	
@@ -109,32 +114,28 @@ void read_print(FILE *fp){
 
 //When input and output is supplied --> input is read from a file and written in output file reversely.
 
-/*
-void read_write(FILE *fp){
+
+void read_write(FILE *fp_read, FILE *fp_write){
 	char line[MAX][MAX];
 	int count = 0;
 	int total = 0;	
 	char *list[200];
 	
-	while(fgets(line[count], MAX, fp)){
+
+	//reading input file into array
+	while(fgets(line[count], MAX, fp_read)){
 		
-		//strcpy(list[count], line);
 		line[count][strlen(line[count]) - 1] = '\0';		
 		count++;
 		
 	}
+	
 
-    	total = count;     
-    	for(count = total - 1; count >= 0; count--) {
-   		printf(" %s\n", line[count]);
-	}
-	printf("\n");
 	
-	
-	for (int i = count-2; i >= 0; i--) {
-        	printf("%s\n", list[i]);
-        	free(list[i]);
-        	list[i] = NULL;
+	//printing the array in reverse
+	for (int i = count-1; i >= 0; i--) {
+		fprintf(fp_write, "%s\n", line[i]);
+        	
     }
 		
 
@@ -142,48 +143,62 @@ void read_write(FILE *fp){
 }
 
 
-*/
+
 
 int main(int argc, char *argv[]) {
-
-    //char file_read[] = "";
-    //char file_write[] = "";
     
     
-
+    
+    //no arguments given --> input from keyboard and output on stdout
     if (argc == 1){
     	read_write_stdout_stdin();
     }
     
     
-     
+    //one argument give --> assuming its the input file --> read the input file and print it in reverse on stdout 
     if (argc == 2){
     	FILE *fp = NULL;
     	fp = fopen(argv[1], "r");
 	if (fp == NULL) {
-		fprintf(stderr, "error: cannot open file '%s'\n", argv[1]); 	
-		exit (1);
+	fprintf(stderr, "error: cannot open file '%s'\n", argv[1]);
+	exit(1);
 	}
     	read_print(fp);
     	fclose(fp);
     }
+    
+    //input and output files given but they are identical
     if ((argc > 2) &&(strcmp(argv[1], argv[2])==0)){
     	fprintf(stderr, "Input and output file must differ\n");
         exit(1);
     }
     
-
+    //too many arguments
     if (argc > 3) {
-    	printf("%d", argc);
-        fprintf(stderr, "usage: reverse <input> <output>\n");
+        fprintf(stderr, "Usage: reverse <input> <output>\n");
         exit(1);
     }
     
+    //input and output file given correctly, input read from file and output written in reverse in output file
     if (argc == 3){
-    	fprintf(stdout, "Lit nyt annoit inputin ja outputin ja joudun koodaa äijälle niin vitusti funktioit :CC \n");
+    	FILE *fp_read = NULL;
+    	FILE *fp_write = NULL;
+    	fp_read = fopen(argv[1], "r");
+	if (fp_read == NULL) {
+		fprintf(stderr, "error: cannot open file '%s'\n", argv[1]);
+		exit(1);	
+	} 
+    	fp_write = fopen(argv[2], "w");
+	if (fp_write == NULL) {
+		fprintf(stderr, "error: cannot open file '%s'\n", argv[2]);
+		exit(1);	
+	}    	
+	read_write(fp_read, fp_write);
+    	fclose(fp_read);
+    	fclose(fp_write);
     }
     
-    printf("Thank you for using our program!\n");
+    printf("Thank you for using our program\n");
     return 0;
 }
 
