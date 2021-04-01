@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define MAX 1000000    
+#define MAX 1000
 #define BUFFSIZE 100
 
 
@@ -77,6 +77,7 @@ void  read_write_stdout_stdin(){
         words[i] = NULL;
     }  
 
+    printf("\n");
 }
     	
     	
@@ -107,6 +108,8 @@ void read_print(FILE *fp){
 }
 
 //When input and output is supplied --> input is read from a file and written in output file reversely.
+
+/*
 void read_write(FILE *fp){
 	char line[MAX][MAX];
 	int count = 0;
@@ -128,18 +131,18 @@ void read_write(FILE *fp){
 	printf("\n");
 	
 	
-	/*for (int i = count-2; i >= 0; i--) {
+	for (int i = count-2; i >= 0; i--) {
         	printf("%s\n", list[i]);
         	free(list[i]);
         	list[i] = NULL;
-    } */ 
+    }
 		
 
 
 }
 
 
-	
+*/
 
 int main(int argc, char *argv[]) {
 
@@ -155,12 +158,12 @@ int main(int argc, char *argv[]) {
     
      
     if (argc == 2){
-    	fprintf(stdout, "its lit u got one parameter jes vittuuuu!!!");
-    	//strcpy(file_read, argv[1]);
-    	//read_and_write(file_read);
     	FILE *fp = NULL;
-    	fp = fopen("pikkukalle.txt", "r");
-    	//read_and_print(fp);
+    	fp = fopen(argv[1], "r");
+	if (fp == NULL) {
+		fprintf(stderr, "error: cannot open file '%s'\n", argv[1]); 	
+		exit (1);
+	}
     	read_print(fp);
     	fclose(fp);
     }
@@ -172,7 +175,7 @@ int main(int argc, char *argv[]) {
 
     if (argc > 3) {
     	printf("%d", argc);
-        fprintf(stderr, "Usage: reverse <input> <output>\n");
+        fprintf(stderr, "usage: reverse <input> <output>\n");
         exit(1);
     }
     
