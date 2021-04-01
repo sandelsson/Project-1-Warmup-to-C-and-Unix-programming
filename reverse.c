@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 #define MAX 1000
-#define BUFFSIZE 100
+#define BUFFSIZE 1000
 
 
 //When no files are supplied by user --> input is read from stdin and output is wrote on screen.
@@ -108,32 +108,31 @@ void read_print(FILE *fp){
 
 //When input and output is supplied --> input is read from a file and written in output file reversely.
 
-/*
-void read_write(FILE *fp){
+
+void read_write(FILE *fp_read, FILE *fp_write){
 	char line[MAX][MAX];
 	int count = 0;
 	int total = 0;	
 	char *list[200];
 	
-	while(fgets(line[count], MAX, fp)){
+
+	//reading input file into array
+	while(fgets(line[count], MAX, fp_read)){
 		
 		//strcpy(list[count], line);
 		line[count][strlen(line[count]) - 1] = '\0';		
 		count++;
 		
 	}
+	
 
-    	total = count;     
-    	for(count = total - 1; count >= 0; count--) {
-   		printf(" %s\n", line[count]);
-	}
-	printf("\n");
 	
-	
-	for (int i = count-2; i >= 0; i--) {
-        	printf("%s\n", list[i]);
-        	free(list[i]);
-        	list[i] = NULL;
+	//printing the array in reverse
+	for (int i = count-1; i >= 0; i--) {
+		fprintf(fp_write, "%s\n", line[i]);
+		//fprintf(stdout, "%s\n", list[i]);
+		//fprintf(fp_write, "\n");
+        	
     }
 		
 
@@ -141,48 +140,51 @@ void read_write(FILE *fp){
 }
 
 
-*/
+
 
 int main(int argc, char *argv[]) {
-
-    //char file_read[] = "";
-    //char file_write[] = "";
     
     
-
+    
+    //no arguments given --> input from keyboard and output on stdout
     if (argc == 1){
     	read_write_stdout_stdin();
     }
     
     
-     
+    //one argument give --> assuming its the input file --> read the input file and print it in reverse on stdout 
     if (argc == 2){
-    	fprintf(stdout, "its lit u got one parameter jes vittuuuu!!!");
-    	//strcpy(file_read, argv[1]);
-    	//read_and_write(file_read);
     	FILE *fp = NULL;
-    	fp = fopen("pikkukalle.txt", "r");
-    	//read_and_print(fp);
+    	fp = fopen(argv[1], "r");
     	read_print(fp);
     	fclose(fp);
     }
+    
+    //input and output files given but they are identical
     if ((argc > 2) &&(strcmp(argv[1], argv[2])==0)){
     	fprintf(stderr, "Input and output file must differ\n");
         exit(1);
     }
     
-
+    //too many arguments
     if (argc > 3) {
     	printf("%d", argc);
         fprintf(stderr, "Usage: reverse <input> <output>\n");
         exit(1);
     }
     
+    //input and output file given correctly, input read from file and output written in reverse in output file
     if (argc == 3){
-    	fprintf(stdout, "Lit nyt annoit inputin ja outputin ja joudun koodaa äijälle niin vitusti funktioit :CC \n");
+    	FILE *fp_read = NULL;
+    	FILE *fp_write = NULL;
+    	fp_read = fopen(argv[1], "r");
+    	fp_write = fopen(argv[2], "w");
+    	read_write(fp_read, fp_write);
+    	fclose(fp_read);
+    	fclose(fp_write);
     }
     
-    printf("Kiitos ohjelman käytöstä.\n");
+    printf("Thank you so much for using our great great program\n-Sandelsson\n-Joonas69\nXO\n");
     return 0;
 }
 
