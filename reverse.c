@@ -9,50 +9,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define MAX 1000
+#define MAX 1000000    
 #define BUFFSIZE 100
 
-/*
-void read(){
-    char * line = NULL;
-    size_t len = 0;
-    ssize_t read;
-    FILE *fp;
-    int count = 0;
-    
-    if (fp = NULL){
-    	fprintf(stderr, "Unable to open file \n");
-    	//perror("Unable to open file\n");
-    	exit(1);
-    }
-    
-    char *list[MAX];
-
-    fp = fopen("pikkukalle.txt","r"); //EN SAA PASSATTUU TOT SAATANAN CMDL ARGUMENTTII
-    
-    while ((read = getline(&line, &len, fp)) != -1) {
-    	
-        strcpy(list[count], line);
-        count++;
-    }
-    
-        printf("\n");    
-    printf("Reverse order: \n\n");    
-    //Loop through the array in reverse order    
-    for (int i = count-2; i >= 0; i--) {
-        printf("%s\n", list[i]);
-        free(list[i]);
-        list[i] = NULL;
-    }  
-
-    fclose(fp);
-    if (line){
-        free(line);
-    }
-    exit(EXIT_SUCCESS); 
-    
-}
-*/
 
 //When no files are supplied by user --> input is read from stdin and output is wrote on screen.
 //source: https://stackoverflow.com/questions/41518039/how-to-input-strings-into-an-array-in-c
@@ -160,34 +119,28 @@ void read_and_print(FILE *fp)
   
 } 
 
+//When input is supplied by user --> input is read from file and output is wrote on screen.
+
 void read_print(FILE *fp){
 	char line[MAX][MAX];
 	int count = 0;
 	int total = 0;	
 	char *list[200];
+
 	
+	//Reading file line by line and adding lines to array	
 	while(fgets(line[count], MAX, fp)){
-		
-		//strcpy(list[count], line);
 		line[count][strlen(line[count]) - 1] = '\0';		
 		count++;
 		
 	}
-
+	
+	//Printing array to screen on reversed order
     	total = count;     
     	for(count = total - 1; count >= 0; count--) {
    		printf(" %s\n", line[count]);
 	}
-	printf("\n");
-	
-	
-	/*for (int i = count-2; i >= 0; i--) {
-        	printf("%s\n", list[i]);
-        	free(list[i]);
-        	list[i] = NULL;
-    } */ 
-		
-
+	printf("\n");	
 
 }
 
