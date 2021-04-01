@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define MAX 100
+#define MAX 1000
 #define BUFFSIZE 100
 
 /*
@@ -161,16 +161,22 @@ void read_and_print(FILE *fp)
 } 
 
 void read_print(FILE *fp){
-	char line[MAX];
+	char line[MAX][MAX];
 	int count = 0;
+	int total = 0;	
 	char *list[200];
 	
-	while(fgets(line, sizeof(line), fp)!=NULL){
+	while(fgets(line[count], MAX, fp)){
 		
 		//strcpy(list[count], line);
-		printf("%s\n", line);		
+		line[count][strlen(line[count]) - 1] = '\0';		
 		count++;
 		
+	}
+
+    	total = count;     
+    	for(count = total - 1; count >= 0; count--) {
+   		printf(" %s\n", line[count]);
 	}
 	printf("\n");
 	
@@ -205,7 +211,7 @@ int main(int argc, char *argv[]) {
     	fprintf(stdout, "its lit u got one parameter jes vittuuuu!!!");
     	//strcpy(file_read, argv[1]);
     	//read_and_write(file_read);
-    	FILE *fp;
+    	FILE *fp = NULL;
     	fp = fopen("pikkukalle.txt", "r");
     	//read_and_print(fp);
     	read_print(fp);
