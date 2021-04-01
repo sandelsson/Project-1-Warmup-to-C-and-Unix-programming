@@ -26,7 +26,6 @@ void  read_write_stdout_stdin(){
     for (i = 0; strcmp(buffer, "0"); i++) {
 
         /* read input of one string, with error checking */
-        //printf("Enter a word: ");
         if (fgets(buffer, BUFFSIZE, stdin) == NULL) {
             fprintf(stderr, "Error reading string into buffer.\n");
             exit(1);
@@ -81,45 +80,8 @@ void  read_write_stdout_stdin(){
 }
     	
     	
-    	
-    	
-//void read_and_write(char* file_read)
 
-//TÄÄ ANTAA JOSTAIN SYYSTÄ SEGMENTATION ERRORII EN TIIÄ MIKS EI PYSTY OIKEE TÄS LINUXIS EES DEBUGGAA KU LÄMÄÄ SEN SAMANTIEN
-void read_and_print(FILE *fp)
-{
-    printf("debugreal1");
-  
-    char *line[MAX];
-    //FILE *fp; 
-    int i = 0;
-    int count = 0;
-    int tot = 0;
-    printf("debug1");	
-
-    //fp = fopen("pikkukalle.txt", "r");
-    while(fgets(line[count], MAX, fp)) 
-	{
-        line[count][strlen(line[count]) - 1] = '\0';
-        count++;
-    }
-    printf("debug2");
-    tot = count; 
-    for(count = 0; count < tot; ++i){
-        printf(" %s\n", line[count]);
-    }
-    printf("\n");
-    printf("debug3");
-    
-    for (int i = count-2; i >= 0; i--) {
-        printf("%s\n", line[i]);
-        free(line[i]);
-        line[i] = NULL;
-    }  
-  
-} 
-
-//When input is supplied by user --> input is read from file and output is wrote on screen.
+//When input is supplied by user --> input is read from file and output is printed on screen.
 
 void read_print(FILE *fp){
 	char line[MAX][MAX];
@@ -144,6 +106,7 @@ void read_print(FILE *fp){
 
 }
 
+//When input and output is supplied --> input is read from a file and written in output file reversely.
 void read_write(FILE *fp){
 	char line[MAX][MAX];
 	int count = 0;
