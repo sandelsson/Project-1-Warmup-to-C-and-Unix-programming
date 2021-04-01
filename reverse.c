@@ -9,8 +9,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define MAX 1000
-#define BUFFSIZE 100
+#define MAX 1000				//We used 1000 as we thought it would cover all cases
+#define BUFFSIZE 1000
 
 
 //When no files are supplied by user --> input is read from stdin and output is wrote on screen.
@@ -183,7 +183,7 @@ int main(int argc, char *argv[]) {
     	fprintf(stdout, "Lit nyt annoit inputin ja outputin ja joudun koodaa äijälle niin vitusti funktioit :CC \n");
     }
     
-    printf("Kiitos ohjelman käytöstä.\n");
+    printf("Thank you for using our program!\n");
     return 0;
 }
 
