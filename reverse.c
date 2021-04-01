@@ -168,7 +168,6 @@ int main(int argc, char *argv[]) {
     
     //too many arguments
     if (argc > 3) {
-    	printf("%d", argc);
         fprintf(stderr, "Usage: reverse <input> <output>\n");
         exit(1);
     }
