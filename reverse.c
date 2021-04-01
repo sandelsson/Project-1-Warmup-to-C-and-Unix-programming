@@ -191,6 +191,37 @@ void read_print(FILE *fp){
 
 }
 
+void read_write(FILE *fp){
+	char line[MAX][MAX];
+	int count = 0;
+	int total = 0;	
+	char *list[200];
+	
+	while(fgets(line[count], MAX, fp)){
+		
+		//strcpy(list[count], line);
+		line[count][strlen(line[count]) - 1] = '\0';		
+		count++;
+		
+	}
+
+    	total = count;     
+    	for(count = total - 1; count >= 0; count--) {
+   		printf(" %s\n", line[count]);
+	}
+	printf("\n");
+	
+	
+	/*for (int i = count-2; i >= 0; i--) {
+        	printf("%s\n", list[i]);
+        	free(list[i]);
+        	list[i] = NULL;
+    } */ 
+		
+
+
+}
+
 
 	
 
