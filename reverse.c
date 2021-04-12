@@ -93,9 +93,7 @@ void read_print(FILE *fp){
 	char line[MAX][MAX];
 	int count = 0;
 	int total = 0;	
-	char *list[200];
 
-	
 	//Reading file line by line and adding lines to array	
 	while(fgets(line[count], MAX, fp)){
 		line[count][strlen(line[count]) - 1] = '\0';		
@@ -117,11 +115,8 @@ void read_print(FILE *fp){
 
 void read_write(FILE *fp_read, FILE *fp_write){
 	char line[MAX][MAX];
-	int count = 0;
-	int total = 0;	
-	char *list[200];
+	int count = 0;	
 	
-
 	//reading input file into array
 	while(fgets(line[count], MAX, fp_read)){
 		
