@@ -13,7 +13,9 @@
 Reverse-function should run with these parameters as instructed:
 
 prompt> ./reverse
+
 prompt> ./reverse input.txt
+
 prompt> ./reverse input.txt output.txt
 
 Theres pikkukalle.txt file ready for testing purposes. Further information of how to program works you can check from reverse.c file comments. 
